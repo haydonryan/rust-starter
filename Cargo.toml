@@ -4,3 +4,39 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+
+
+[profile.release]
+# Link Time Optimizations ON (makes linking times longer)
+lto = true
+
+# slower compile but faster performance (single thread compile)
+codegen-units = 1
+
+# Code optimiztaion
+# 0: no optimizations
+# 1: basic optimizations
+# 2: some optimizations
+# 3: all optimizations
+# "s": optimize for binary size
+# "z": optimize for binary size, but also turn off loop vectorization.
+opt-level = 3
+
+# strip symbols and debug from release
+# Possible string values of strip are "none", "debuginfo", and "symbols". The default is "none".
+strip = "debuginfo"
+
+# Abort on Panic
+panic = "abort"
+
+
+# Disable overflow checks
+overflow-checks = false
+
+
+
+[profile.release.build-override]
+# Best optimization for build dependencies too
+opt-level = 0
+codegen-units = 1
+
